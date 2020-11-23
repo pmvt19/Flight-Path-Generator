@@ -7,10 +7,11 @@
 
 #include <string>
 #include <limits.h>
+#include "airport.h"
 
 using std::string;
 
-typedef string Vertex;
+typedef Airport* Vertex;
 
 /**
  * Represents an edge in a graph; used by the Graph class.
@@ -60,7 +61,7 @@ class Edge
     /**
      * Default constructor.
      */
-    Edge() : source(""), dest(""), label(""), weight(-1)
+    Edge() : source(NULL), dest(NULL), label(""), weight(-1)
     { /* nothing */
     }
 
