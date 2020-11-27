@@ -14,7 +14,7 @@ struct Airport {
     double longitude;
     double altitude;
     double time_zone;
-    char DST;
+    string DST;
     string TZ_database_time;
     string type;
     string source;

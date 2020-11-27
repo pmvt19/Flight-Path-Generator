@@ -7,10 +7,10 @@
 
 int main() {
   VertexParser parser;
-  
-  parser.OpenFile("data/airports.dat");
-  parser.GenerateVertices();
 
-  std::cout << "HELLO" << std::endl;
+  parser.OpenFile("data/airports.dat");
+  vector<Airport*> airports = parser.GenerateVertices();
+
+  std::cout << airports[0]->name << std::endl;
   return 0;
 }
