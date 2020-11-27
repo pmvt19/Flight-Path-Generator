@@ -31,10 +31,30 @@ vector<Airport*> VertexParser::GenerateVertices() {
         airport->country = results.at(3);
         airport->IATA = results.at(4);
         airport->ICAO = results.at(5);
-        airport->latitude = stod(results.at(6));
-        airport->longitude = stod(results.at(7));
-        airport->altitude = stod(results.at(8));
-        airport->time_zone = stod(results.at(9));
+        if (results.at(6) == ("\\N")) {
+            airport->latitude = 0.0;
+        } else {
+            airport->latitude = stod(results.at(6));
+        }
+
+        if (results.at(7) == ("\\N")) {
+            airport->latitude = 0.0;
+        } else {
+            airport->longitude = stod(results.at(7));
+        }
+
+        if (results.at(8) == ("\\N")) {
+            airport->latitude = 0.0;
+        } else {
+            airport->altitude = stod(results.at(8));
+        }
+
+        if (results.at(9) == ("\\N")) {
+            airport->latitude = 0.0;
+        } else {
+            airport->time_zone = stod(results.at(9));
+        }
+
         airport->DST = results.at(10);
         airport->TZ_database_time = results.at(11);
         airport->type = results.at(12);
