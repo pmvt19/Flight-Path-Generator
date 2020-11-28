@@ -20,10 +20,10 @@ vector<Airport*> VertexParser::GenerateVertices() {
             string sub;
             getline(s_stream, sub, ',');
             results.push_back(sub);
-            std::cout << sub << std::endl;
+            // std::cout << sub << std::endl;
         }
-        std::cout << "RESULTS SIZE: " << results.size() << std::endl;
-        //std::cout << line << std::endl;
+        // std::cout << "RESULTS SIZE: " << results.size() << std::endl;
+        // std::cout << line << std::endl;
         Airport* airport = new Airport();
         airport->id = stoi(results.at(0));
         airport->name = results.at(1);
@@ -31,6 +31,7 @@ vector<Airport*> VertexParser::GenerateVertices() {
         airport->country = results.at(3);
         airport->IATA = results.at(4);
         airport->ICAO = results.at(5);
+
         if (results.at(6) == ("\\N")) {
             airport->latitude = 0.0;
         } else {
@@ -59,43 +60,8 @@ vector<Airport*> VertexParser::GenerateVertices() {
         airport->TZ_database_time = results.at(11);
         airport->type = results.at(12);
         airport->source = results.at(13);
-
-        /*for (int i = 0; i < (int) results.size(); i++) {
-            
-        
-        }*/
         airports.push_back(airport);
     }
-
-
-    //vector<string> row;
-
-    /*string line;
-    getline(file, line);
-    stringstream s(line);
-    string word;
-
-    while (getline(s, word, ', ')) { 
-
-        // add all the column data 
-        // of a row to a vector 
-        row.push_back(word); 
-    }*/
-
-    /*while (getline(file, line)) {
-        
-    }*/
-
-
-
-    /*for (int i = 0; i < 10; i++) {
-        //std::cout << file.getline() << std::endl;
-        string line;
-        getline(file, line);
-
-        std::cout << line << std::endl;
-    }*/
-
 
     return airports;
 }

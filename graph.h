@@ -35,6 +35,7 @@
 #include <vector>
 
 #include "edge.h"
+#include "random.h"
 
 using std::cerr;
 using std::cout;
@@ -78,7 +79,7 @@ public:
      * @param numVertices - the number of vertices the graph will have
      * @param seed - a random seed to create the graph with
      */
-    Graph(bool weighted, int numVertices, unsigned long seed);
+    //Graph(bool weighted, int numVertices, unsigned long seed);
 
     /**
      * Gets all adjacent vertices to the parameter vertex.
@@ -210,7 +211,7 @@ public:
      * Saves a snapshot of the graph to file.
      * initSnapshot() must be run first.
      */
-    void snapshot();
+    //void snapshot();
 
     /**
      * Prints the graph to stdout.
@@ -221,11 +222,13 @@ public:
      * Saves the graph as a PNG image.
      * @param title - the filename of the PNG image
      */
-    void savePNG(string title) const;
+    //void savePNG(string title) const;
 
     bool isDirected() const;
 
     void clear();
+
+    size_t getNumVertices();
 
 
     const static Vertex InvalidVertex;
@@ -240,6 +243,8 @@ private:
     bool directed;
     int picNum;
     string picName;
+    size_t numVertices = 0;
+    // Random random;
 
 
     /**

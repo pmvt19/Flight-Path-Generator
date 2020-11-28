@@ -1,19 +1,19 @@
 #include "graph.h"
 
-const Vertex Graph::InvalidVertex = "_CS225INVALIDVERTEX";
+const Vertex Graph::InvalidVertex = NULL;
 const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
 
-Graph::Graph(bool weighted) : weighted(weighted),directed(false),random(Random(0))
+Graph::Graph(bool weighted) : weighted(weighted),directed(false)
 {
 }
 
-Graph::Graph(bool weighted, bool directed) : weighted(weighted),directed(directed),random(Random(0))
+Graph::Graph(bool weighted, bool directed) : weighted(weighted),directed(directed)
 {
 }
 
-Graph::Graph(bool weighted, int numVertices, unsigned long seed)
+/*Graph::Graph(bool weighted, int numVertices, unsigned long seed)
     :weighted(weighted),
       directed(false),
      random(Random(seed)) 
@@ -71,7 +71,7 @@ Graph::Graph(bool weighted, int numVertices, unsigned long seed)
             }
         }
     }
-}
+}*/
 
 vector<Vertex> Graph::getAdjacent(Vertex source) const 
 {
@@ -198,6 +198,7 @@ void Graph::insertVertex(Vertex v)
     removeVertex(v);
     // make it empty again
     adjacency_list[v] = unordered_map<Vertex, Edge>();
+    numVertices++;
 }
 
 
@@ -308,8 +309,6 @@ bool Graph::assertEdgeExists(Vertex source, Vertex destination, string functionN
         return false;
     if(adjacency_list[source].find(destination)== adjacency_list[source].end())
     {
-        if (functionName != "")
-            error(functionName + " called on nonexistent edge " + source + " -> " + destination);
         return false;
     }
 
@@ -319,8 +318,6 @@ bool Graph::assertEdgeExists(Vertex source, Vertex destination, string functionN
             return false;
         if(adjacency_list[destination].find(source)== adjacency_list[destination].end())
         {
-            if (functionName != "")
-                error(functionName + " called on nonexistent edge " + destination + " -> " + source);
             return false;
         }
     }
@@ -362,14 +359,14 @@ void Graph::initSnapshot(string title)
  * Saves a snapshot of the graph to file.
  * initSnapshot() must be run first.
  */
-void Graph::snapshot()
+/*void Graph::snapshot()
 {
     std::stringstream ss;
     ss << picNum;
     string newName = picName + ss.str();
     savePNG(newName);
     ++picNum;
-}
+}*/
 
 /**
  * Prints the graph to stdout.
@@ -396,11 +393,15 @@ void Graph::print() const
     }
 }
 
+size_t Graph::getNumVertices() {
+    return numVertices;
+}
+
 /**
  * Saves the graph as a PNG image.
  * @param title - the filename of the PNG image
  */
-void Graph::savePNG(string title) const
+/*void Graph::savePNG(string title) const
 {
     std::ofstream neatoFile;
     string filename = "images/" + title + ".dot";
@@ -491,4 +492,4 @@ void Graph::savePNG(string title) const
 
     string rmCommand = "rm -f " + filename + " 2> /dev/null";
     system(rmCommand.c_str());
-}
+}*/
