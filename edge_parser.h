@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <cmath>
 #include <unordered_map>
 #include "airport.h"
 #include "graph.h"
@@ -18,9 +19,11 @@ using std::stringstream;
 class EdgeParser {
     private:
         ifstream file;
+        double convertToRadians(const double degree);
 
     public:
         bool OpenFile(const string& file_path);
         void CreateEdges(Graph& graph, const unordered_map<int, Airport*> map);
         double calculateDistance(double lat1, double long1, double lat2, double long2);
+
 };

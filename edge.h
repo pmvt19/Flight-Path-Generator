@@ -104,6 +104,11 @@ class Edge
             return false;
         return true;
     }
+
+    void setLabel(string new_label) {
+        label = new_label;
+    }
+    
 private:
     string label; /**< The edge label **/
     int weight; /**< The edge weight (if in a weighed graph) **/

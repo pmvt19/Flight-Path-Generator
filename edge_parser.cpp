@@ -37,5 +37,24 @@ void EdgeParser::CreateEdges(Graph& graph, const unordered_map<int, Airport*> ma
 }
 
 double EdgeParser::calculateDistance(double lat1, double long1, double lat2, double long2) {
-    return 0.0;
+    double rLat1 = convertToRadians(lat1);
+    double rLong1 = convertToRadians(long1);
+    double rLat2 = convertToRadians(lat2);
+    double rLong2 = convertToRadians(long2);
+
+    double longDiff = rLong2 - rLong1;
+    double latDiff = rLat2 - rLat1;
+
+    double dist = pow(sin(latDiff / 2), 2) + cos(rLat1) * cos(rLat2) * pow(sin(longDiff / 2), 2);
+
+    dist = 2 * asin(sqrt(dist));
+
+    double earthRadius = 6371;
+
+    return earthRadius * dist;
+}
+
+double EdgeParser::convertToRadians(const double degree) {
+
+    return (M_PI / 180) * degree;
 }

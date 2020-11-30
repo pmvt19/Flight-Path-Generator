@@ -33,7 +33,8 @@ int main() {
   std::cout << airports[7697]->name << std::endl;
   std::cout << map[4063]->name << std::endl;
 
-  std::cout << "EDGE SHOULD EXIST: " << graph.edgeExists(map[12087], map[3131]) << std::endl; 
+  std::cout << graph.getEdgeWeight(map[3797], map[3670]) << std::endl;
+  std::cout << "EDGE SHOULD EXIST: " << graph.edgeExists(map[3797], map[3670]) << std::endl;
   // std::cout << airports[2965]->name << std::endl;
   return 0;
 }
