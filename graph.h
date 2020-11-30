@@ -117,6 +117,8 @@ public:
      */
     vector<Edge> getEdges() const;
 
+    vector<Edge*> getEdgesByPointer() const;
+
     /**
      * Checks if the given vertex exists.
      * @return - if Vertex exists, true

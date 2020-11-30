@@ -6,6 +6,7 @@
 #include "edge.h"
 #include "vertex_parser.h"
 #include "edge_parser.h"
+#include "BFS_Traversal.h"
 
 int main() {
   Graph graph(true, true);
@@ -36,5 +37,10 @@ int main() {
   std::cout << graph.getEdgeWeight(map[3797], map[3670]) << std::endl;
   std::cout << "EDGE SHOULD EXIST: " << graph.edgeExists(map[3797], map[3670]) << std::endl;
   // std::cout << airports[2965]->name << std::endl;
+
+  BFS bfs;
+  std::cout << "BFS FIND: " << bfs.search(graph, 8853) << std::endl;
+  
+  
   return 0;
 }

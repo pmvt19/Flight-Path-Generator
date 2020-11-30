@@ -18,4 +18,5 @@ struct Airport {
     string TZ_database_time;
     string type;
     string source;
+    string label;
 };
