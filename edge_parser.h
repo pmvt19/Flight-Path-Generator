@@ -19,11 +19,11 @@ using std::stringstream;
 class EdgeParser {
     private:
         ifstream file;
-        double convertToRadians(const double degree);
 
     public:
         bool OpenFile(const string& file_path);
         void CreateEdges(Graph& graph, const unordered_map<int, Airport*> map);
+        double convertToRadians(const double degree);
         double calculateDistance(double lat1, double long1, double lat2, double long2);
 
 };

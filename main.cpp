@@ -40,6 +40,10 @@ int main() {
 
   BFS bfs;
   std::cout << "BFS FIND: " << bfs.search(graph, 8853) << std::endl;
+
+  std::cout << graph.getEdgeWeight(map[1], map[2]) << std::endl;
+
+  
   
   
   return 0;
