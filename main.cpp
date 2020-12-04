@@ -7,6 +7,7 @@
 #include "vertex_parser.h"
 #include "edge_parser.h"
 #include "BFS_Traversal.h"
+#include "dijkstra.h"
 
 int main() {
   Graph graph(true, true);
@@ -38,10 +39,25 @@ int main() {
   std::cout << "EDGE SHOULD EXIST: " << graph.edgeExists(map[3797], map[3670]) << std::endl;
   // std::cout << airports[2965]->name << std::endl;
 
-  BFS bfs;
-  std::cout << "BFS FIND: " << bfs.search(graph, 8853) << std::endl;
+  // BFS bfs;
+  // std::cout << "BFS FIND: " << bfs.search(graph, 8853) << std::endl;
 
-  std::cout << graph.getEdgeWeight(map[1], map[2]) << std::endl;
+  // std::cout << graph.getEdgeWeight(map[1], map[2]) << std::endl;
+
+  Dijkstra dijkstra;
+  vector<Vertex> path = dijkstra.DijkstraSSSP(graph, map[3830], map[3131]);
+  int total_distance = 0;
+  for (Vertex v : path) {
+    std::cout << v->name << std::endl;
+  }
+
+  for (int i = 0; i < (int) path.size() - 1; i++) {
+    total_distance += edge_parser.calculateDistance(path[i]->latitude, path[i]->longitude, path[i+1]->latitude, path[i + 1]->longitude);
+  }
+
+  std::cout << "TOTAL DISTANCE: " << total_distance << std::endl;
+  
+
 
   
   

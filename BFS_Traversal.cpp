@@ -21,17 +21,6 @@ bool BFS::search(Graph& graph, int id) {
         }
     }
 
-    /*for (int i = 0; i < (int) graph.getVertices().size(); i++) {
-        if (!visited[i]) {
-            bool result = search(graph, graph.getVertices().at(i), id);
-            
-            if (result) {
-                return result;
-            }
-
-        }
-    }*/
-
     return false;
 }
 
