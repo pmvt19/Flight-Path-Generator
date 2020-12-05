@@ -29,7 +29,7 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
             pq.push(data);
         }*/
 
-        distances[v] = INFINITY;
+        distances[v] = 20090;
         previous[v] = NULL;
         visited[v] = false;
     }
@@ -54,7 +54,7 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
     //     visited[current] = true;
     // }
 
-    std::cout << "OVERHERE: " << pq.top().first->IATA << std::endl;
+    // std::cout << "OVERHERE: " << pq.top().first->IATA << std::endl;
     
 
     pair<Vertex, int> curr = pq.top();
@@ -64,16 +64,19 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
         //std::cout << curr.first->name << " :WHILE" << std::endl;
         int i = 0;
         for (Vertex adj : graph.getAdjacent(curr.first)) {
-            // std::cout << curr.first->IATA << " :FOR " << i++ << std::endl;
+            std::cout << curr.first->IATA << " :ADJ " << i++ << std::endl;
+            //std::cout << adj->IATA << " :ADJ " << i++ << std::endl;
             if (visited[adj]) {
                 continue;
             }
             Edge edge = graph.getEdge(curr.first, adj);
             int newDistance = edge.getWeight() + distances[curr.first];
-            //pq.push(make_pair(adj, newDistance));
+            //std::cout << "NEW DISTANCE: " << newDistance << std::endl;
+            //std::cout << "OLD DISTANCE: " << distances[adj] << std::endl;
+            // pq.push(make_pair(adj, newDistance));
             if (newDistance < distances[adj]) {
                 pq.push(make_pair(adj, newDistance));
-                std::cout << "ENTERED" << std::endl;
+                //std::cout << "ENTERED" << std::endl;
                 distances[adj] = newDistance;
                 previous[adj] = curr.first;
             }
@@ -94,22 +97,27 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
     vector<Vertex> path;
     path.insert(path.begin(), d);
     int i = 0;
+    bool pathExists = true;
     while (current != NULL && current != s) {
-        std::cout << "HOW YOU ENTER" << std::endl;
-        std::cout << current->IATA << " :FOR " << i++ << std::endl;
+        //std::cout << "HOW YOU ENTER" << std::endl;
+        //std::cout << current->IATA << " :FOR " << i++ << std::endl;
         path.insert(path.begin(), previous[current]);
         //std::cout << current->IATA << " :FOR " << i << std::endl;
         std::cout << current << " :WHILE " << i++ << std::endl;
         current = previous[current];
-        std::cout << current << " :KEVIN " << i << std::endl;
+        if (current == NULL) {
+            pathExists = false;
+        }
+        //std::cout << current << " :KEVIN " << i << std::endl;
         //std::cout << current->IATA << " :FOR " << i++ << std::endl;
         //std::cout << current->id << " :FOR" << std::endl;
     }
 
+    if (!pathExists) {
+        path.clear();
+    }
 
     return path;
-
-
 }
 
 double Dijkstra::cost(Edge u, Edge v) {
