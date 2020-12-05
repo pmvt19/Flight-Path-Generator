@@ -11,10 +11,10 @@ void Dijkstra::DijkstraSSSP(Graph& graph, Vertex s) {
 // }
 
 vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
-    unordered_map<Vertex, int> distances;
+    unordered_map<Vertex, double> distances;
     unordered_map<Vertex, Vertex> previous;
     //priority_queue<Vertex> q;
-    priority_queue<pair<Vertex, int>, vector<pair<Vertex, int>>, Compare> pq;
+    priority_queue<pair<Vertex, double>, vector<pair<Vertex, double>>, Compare> pq;
     //priority_queue<pair<Vertex, int>> pq;
     unordered_map<Vertex, bool> visited;
 
@@ -57,7 +57,7 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
     // std::cout << "OVERHERE: " << pq.top().first->IATA << std::endl;
     
 
-    pair<Vertex, int> curr = pq.top();
+    pair<Vertex, double> curr = pq.top();
     while (!pq.empty() && curr.first != d) {
         curr = pq.top();
         curr.second = distances[curr.first];
@@ -70,9 +70,9 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
                 continue;
             }
             Edge edge = graph.getEdge(curr.first, adj);
-            int newDistance = edge.getWeight() + distances[curr.first];
-            //std::cout << "NEW DISTANCE: " << newDistance << std::endl;
-            //std::cout << "OLD DISTANCE: " << distances[adj] << std::endl;
+            double newDistance = edge.getWeight() + distances[curr.first];
+            std::cout << "NEW DISTANCE: " << newDistance << std::endl;
+            std::cout << "OLD DISTANCE: " << distances[adj] << std::endl;
             // pq.push(make_pair(adj, newDistance));
             if (newDistance < distances[adj]) {
                 pq.push(make_pair(adj, newDistance));
