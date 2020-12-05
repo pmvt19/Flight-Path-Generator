@@ -20,7 +20,7 @@ class Dijkstra {
     class Compare {
         public:
             int operator()(const pair<Vertex, int> a, const pair<Vertex, int> b) {
-                return a.second < b.second;
+                return a.second > b.second;
             }
     };
 };

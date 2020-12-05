@@ -19,19 +19,22 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
     unordered_map<Vertex, bool> visited;
 
     for (Vertex v : graph.getVertices()) {
-        distances[v] = INFINITY;
+        
         //q.push(v);
-        if (v->name == s->name) {
+        /*if (v->name == s->name) {
             pair<Vertex, int> data = make_pair(v, 0);
             pq.push(data);
         } else {
             pair<Vertex, int> data = make_pair(v, INFINITY);
             pq.push(data);
-        }
-        previous[v] = s;
+        }*/
+
+        distances[v] = INFINITY;
+        previous[v] = NULL;
         visited[v] = false;
     }
     distances[s] = 0;
+    pq.push(make_pair(s, 0));
 
     // Vertex current = q.top();
     
@@ -67,7 +70,9 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
             }
             Edge edge = graph.getEdge(curr.first, adj);
             int newDistance = edge.getWeight() + distances[curr.first];
+            //pq.push(make_pair(adj, newDistance));
             if (newDistance < distances[adj]) {
+                pq.push(make_pair(adj, newDistance));
                 std::cout << "ENTERED" << std::endl;
                 distances[adj] = newDistance;
                 previous[adj] = curr.first;
