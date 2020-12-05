@@ -94,11 +94,14 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
     vector<Vertex> path;
     path.insert(path.begin(), d);
     int i = 0;
-    while (current != s) {
-        std::cout << current->IATA << " :FOR " << i << std::endl;
+    while (current != NULL && current != s) {
+        std::cout << "HOW YOU ENTER" << std::endl;
+        std::cout << current->IATA << " :FOR " << i++ << std::endl;
         path.insert(path.begin(), previous[current]);
         //std::cout << current->IATA << " :FOR " << i << std::endl;
+        std::cout << current << " :WHILE " << i++ << std::endl;
         current = previous[current];
+        std::cout << current << " :KEVIN " << i << std::endl;
         //std::cout << current->IATA << " :FOR " << i++ << std::endl;
         //std::cout << current->id << " :FOR" << std::endl;
     }
