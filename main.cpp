@@ -199,7 +199,12 @@ void userProgram() {
   vector<vector<Vertex>> airport_path = landmark.findLandmarkPath(graph, airport_list);
   int total_distance = 0;
   std::cout << "Full Path of Trip:" << std::endl;
+  int count = 0;
   for (vector<Vertex> p : airport_path) {
+    // Handles case where route does not exist
+    if (p.size() == 0) {
+      std::cout << airport_list.at(count) -> name << " to " << airport_list.at(count + 1) -> name << " does not exist.";
+    }
     for (unsigned int i = 0; i < p.size(); i++) {
       if (i + 1 == p.size()) {
         std::cout << p[i]->name;
@@ -208,15 +213,18 @@ void userProgram() {
       }
     }
     std::cout << std::endl;
+    count++;
   }
 
   for (vector<Vertex> p : airport_path) {
-    for (unsigned int i = 0; i < p.size() - 1; i++) {
+    for (int i = 0; i < (int) p.size() - 1; i++) {
       total_distance += edge_parser.calculateDistance(p[i]->latitude, p[i]->longitude, p[i+1]->latitude, p[i + 1]->longitude);
     }
   }
 
   std::cout << "Total Distance: " << total_distance << std::endl;
+
+  std::cout << "Bon Voyage! :)" << std::endl;
 
 }
 
