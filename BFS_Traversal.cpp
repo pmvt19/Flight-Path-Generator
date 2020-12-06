@@ -2,7 +2,6 @@
 
 bool BFS::search(Graph& graph, int id) {
     visited.resize(graph.getVertices().size());
-    //edges = graph.getEdges();
 
     for (Vertex v : graph.getVertices()) {
         v->label = "UNEXPLORED";
@@ -20,7 +19,6 @@ bool BFS::search(Graph& graph, int id) {
             }
         }
     }
-
     return false;
 }
 
@@ -32,20 +30,19 @@ bool BFS::search(Graph& graph, Vertex v, int id) {
     while(!q.empty()) {
         v = q.front();
         q.pop();
+
         if (v->id == id) {
             return true;
         }
+
         for (Vertex w : graph.getAdjacent(v)) {
             if (w->label == "UNEXPLORED") {
                 graph.setEdgeLabel(v, w, "DISCOVERY");
                 w->label = "VISITED";
-                
                 q.push(w);
-                
             } else if (graph.getEdgeLabel(v, w) == "UNEXPLORED") {
                 graph.setEdgeLabel(v, w, "CROSS");
             }
-            
         }
     }
 

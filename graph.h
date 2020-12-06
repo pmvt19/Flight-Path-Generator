@@ -73,15 +73,6 @@ public:
     Graph(bool weighted, bool directed);
 
     /**
-     * Constructor to create a random, connected graph.
-     * @param weighted - specifies whether the graph is a weighted graph or
-     *  not
-     * @param numVertices - the number of vertices the graph will have
-     * @param seed - a random seed to create the graph with
-     */
-    //Graph(bool weighted, int numVertices, unsigned long seed);
-
-    /**
      * Gets all adjacent vertices to the parameter vertex.
      * @param source - vertex to get neighbors from
      * @return a vector of vertices
@@ -208,12 +199,6 @@ public:
      * @param title - the name to save the snapshots as
      */
     void initSnapshot(string title);
-
-    /**
-     * Saves a snapshot of the graph to file.
-     * initSnapshot() must be run first.
-     */
-    //void snapshot();
 
     /**
      * Prints the graph to stdout.

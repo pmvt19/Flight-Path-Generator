@@ -55,6 +55,5 @@ double EdgeParser::calculateDistance(double lat1, double long1, double lat2, dou
 }
 
 double EdgeParser::convertToRadians(const double degree) {
-
     return (M_PI / 180) * degree;
 }
