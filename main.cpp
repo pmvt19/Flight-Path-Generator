@@ -203,7 +203,7 @@ void userProgram() {
   for (vector<Vertex> p : airport_path) {
     // Handles case where route does not exist
     if (p.size() == 0) {
-      std::cout << airport_list.at(count) -> name << " to " << airport_list.at(count + 1) -> name << " does not exist.";
+      std::cout << "The route from " << airport_list.at(count) -> name << " to " << airport_list.at(count + 1) -> name << " does not exist.";
     }
     for (unsigned int i = 0; i < p.size(); i++) {
       if (i + 1 == p.size()) {
