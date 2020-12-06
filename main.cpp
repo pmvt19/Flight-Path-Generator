@@ -93,10 +93,136 @@ void new_test_case() {
   std::cout << "CHICAGO TO LAX: " << edge_parser.calculateDistance(map[3830]->latitude, map[3830]->longitude, map[3484]->latitude, map[3484]->longitude) << std::endl;
 }
 
+void userProgram() {
+  Graph graph(true, true);
+
+  VertexParser parser;
+  parser.OpenFile("data/airports.dat");
+  vector<Vertex> airports = parser.GenerateVertices();
+  unordered_map<int, Airport*> map;
+
+  for (int i = 0; i < (int) airports.size(); i++) {
+    if (!graph.vertexExists(airports.at(i))) {
+      graph.insertVertex(airports.at(i));
+      //map.insert(airports.at(i)->id, airports.at(i));
+      map[airports.at(i)->id] = airports.at(i);
+    }
+  }
+
+  EdgeParser edge_parser;
+  edge_parser.OpenFile("data/routes.dat");
+  edge_parser.CreateEdges(graph, map);
+
+  vector<Vertex> airport_list;
+
+  std::cout << "Please enter your origin airport id" << std::endl;
+  //string origin;
+  //std::cin >> origin;
+  // while (true) {
+  //   try {
+  //     std::cout << "Origin: " << map[stoi(origin)]->name << std::endl;
+  //     break;
+  //   } catch (int e) {
+  //     std::cout << "Please enter a valid origin id" << std::endl;
+  //   }
+  // }
+  
+  // while (true) {
+  //   int origin = 0;
+  //   std::cin >> origin;
+  //   if (!std::cin.fail()) {
+  //     std::cout << "Origin: " << map[origin]->name << std::endl;
+  //     airport_list.push_back(map[origin]);
+  //     break;
+  //   } else {
+  //     std::cout << "Please enter a valid origin id" << std::endl;
+  //     std::cin.clear();
+  //   }
+  // }
+
+  int origin = 0;
+  std::cin >> origin;
+
+  while (std::cin.fail() || !map.count(origin)) {
+    std::cout << "Please enter a valid origin id" << std::endl;
+    std::cin.clear();
+    std::cin.ignore(256, '\n');
+    std::cin >> origin;
+  }
+
+  std::cout << "Origin: " << map[origin]->name << std::endl;
+  airport_list.push_back(map[origin]);
+
+  
+
+  // std::cout << "How many destination airports would you like?" << std::endl;
+  // string num_destination;
+  // std::cin >> num_destination;
+  // int num_dest = stoi(num_destination);
+
+  std::cout << "How many destination airports would you like?" << std::endl;
+
+  int num_dest = 0;
+  std::cin >> num_dest;
+
+  while (std::cin.fail() || num_dest <= 0) {
+    std::cout << "Please enter a valid number of destinations" << std::endl;
+    std::cin.clear();
+    std::cin.ignore(256, '\n');
+    std::cin >> num_dest;
+  }
+
+  for (int i = 0; i < num_dest; i++) {
+    // std::cout << "Please enter your destination airport id" << std::endl;
+    // string destination;
+    // std::cin >> destination;
+    // std::cout << "Destination #" << i + 1 << " : " << map[stoi(destination)]->name << std::endl;
+    // airport_list.push_back(map[stoi(destination)]);
+
+    std::cout << "Please enter your destination airport id" << std::endl;
+
+    int dest = 0;
+    std::cin >> dest;
+
+    while (std::cin.fail() || !map.count(dest)) {
+      std::cout << "Please enter a valid destination id" << std::endl;
+      std::cin.clear();
+      std::cin.ignore(256, '\n');
+      std::cin >> dest;
+    }
+
+    std::cout << "Destination #" << i + 1 << " : " << map[dest]->name << std::endl;
+    airport_list.push_back(map[dest]);
+  }
+
+  Landmark landmark;
+  vector<vector<Vertex>> airport_path = landmark.findLandmarkPath(graph, airport_list);
+  int total_distance = 0;
+  std::cout << "Full Path of Trip:" << std::endl;
+  for (vector<Vertex> p : airport_path) {
+    for (unsigned int i = 0; i < p.size(); i++) {
+      if (i + 1 == p.size()) {
+        std::cout << p[i]->name;
+      } else {
+        std::cout << p[i]->name << " -> ";
+      }
+    }
+    std::cout << std::endl;
+  }
+
+  for (vector<Vertex> p : airport_path) {
+    for (unsigned int i = 0; i < p.size() - 1; i++) {
+      total_distance += edge_parser.calculateDistance(p[i]->latitude, p[i]->longitude, p[i+1]->latitude, p[i + 1]->longitude);
+    }
+  }
+
+  std::cout << "Total Distance: " << total_distance << std::endl;
+
+}
 
 int main() {
   
-  Graph graph(true, true);
+  /*Graph graph(true, true);
 
   VertexParser parser;
   parser.OpenFile("data/airports.dat");
@@ -158,12 +284,14 @@ int main() {
 
   for (Vertex v : landmark_path) {
     std::cout << v->name << std::endl;
-  }
+  }*/
   
 
   // test_case();
 
   // new_test_case();
+
+  userProgram();
 
   
   

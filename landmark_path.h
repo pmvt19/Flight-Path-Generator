@@ -8,5 +8,6 @@
 
 class Landmark {
     public:
-        vector<Vertex> findLandmarkPath(Graph& graph, vector<Vertex> airports);
+        //vector<Vertex> findLandmarkPath(Graph& graph, vector<Vertex> airports);
+        vector<vector<Vertex>> findLandmarkPath(Graph& graph, vector<Vertex> airports);
 };
