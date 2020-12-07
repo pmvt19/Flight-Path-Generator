@@ -16,11 +16,12 @@ using std::stringstream;
 
 
 class EdgeParser {
+    
     private:
         ifstream file;
 
     public:
-    
+
         /**
          * @param file_path - File path of the file to open
          * @return - True if the file was successfully opened; False otherwise

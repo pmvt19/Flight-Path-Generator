@@ -24,7 +24,7 @@ int getOriginId(unordered_map<int, Airport*> map) {
     std::cin.ignore(256, '\n');
     std::cin >> origin;
   }
-
+  std::cout << "Origin Airport: " << map[origin]->name << std::endl;
   return origin;
 }
 
@@ -137,5 +137,5 @@ int main() {
 
   userProgram();
   return 0;
-  
+
 }

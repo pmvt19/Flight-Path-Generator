@@ -22,7 +22,6 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
         curr = pq.top();
         curr.second = distances[curr.first];
 
-
         for (Vertex adj : graph.getAdjacent(curr.first)) {
             if (visited[adj]) {
                 continue;

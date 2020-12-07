@@ -11,6 +11,8 @@
 #include "../vertex_parser.h"
 #include "../edge_parser.h"
 #include "../BFS_Traversal.h"
+#include "../dijkstra.h"
+#include "../landmark_path.h"
 
 
 TEST_CASE("Testing parse airports.dat into the map", "[map_vertex]") {
@@ -144,7 +146,7 @@ TEST_CASE("Tesitng parse routes.dat into the map", "[map_edge]") {
   SECTION("Correct distance from source airport to destination airport") {
     // In kilometers
     int distance = 2234;
-    REQUIRE( graph.getEdgeWeight(map[3797], map[3670]) == distance );
+    REQUIRE( (int) graph.getEdgeWeight(map[3797], map[3670]) == distance );
   }
 
   SECTION("Invalid edge does not exist") {
@@ -221,4 +223,78 @@ TEST_CASE("Testing edge_parser helper functions", "[edge_parser]") {
       REQUIRE( (int) edge_parser.calculateDistance(airport1_lat, airport1_long, airport2_lat, airport2_long) == 106);
   }
 
+}
+
+TEST_CASE("Testing Dijkstra's Algorithm", "[dijkstra]") {
+
+  Graph graph(true, true);
+
+  VertexParser parser;
+  parser.OpenFile("data/airports.dat");
+  vector<Airport*> airports = parser.GenerateVertices();
+  unordered_map<int, Airport*> map;
+
+  for (int i = 0; i < (int) airports.size(); i++) {
+    if (!graph.vertexExists(airports.at(i))) {
+      graph.insertVertex(airports.at(i));
+      map[airports.at(i)->id] = airports.at(i);
+    }
+  }
+
+  EdgeParser edge_parser;
+  edge_parser.OpenFile("data/routes.dat");
+  edge_parser.CreateEdges(graph, map);
+
+  Dijkstra dijkstra;
+  SECTION ("Dijkstra's finds shortest path between two directly linked airports") {
+    vector<Vertex> path = dijkstra.DijkstraSSSP(graph, map[3830], map[156]);
+    REQUIRE(path.size() == 2);
+    REQUIRE(path[0]->IATA == "\"ORD\"");
+    REQUIRE(path[1]->IATA == "\"YVR\"");
+  }
+
+  SECTION ("Dijkstra's finds shortest path between two indirectly linked airports") {
+    vector<Vertex> path = dijkstra.DijkstraSSSP(graph, map[3830], map[3131]);
+    REQUIRE(path.size() == 3);
+    REQUIRE(path[0]->IATA == "\"ORD\"");
+    REQUIRE(path[1]->IATA == "\"DEL\"");
+    REQUIRE(path[2]->IATA == "\"BLR\"");
+  }
+}
+
+TEST_CASE("Testing Landmark Algorithm", "[landmark]") {
+
+  Graph graph(true, true);
+
+  VertexParser parser;
+  parser.OpenFile("data/airports.dat");
+  vector<Airport*> airports = parser.GenerateVertices();
+  unordered_map<int, Airport*> map;
+
+  for (int i = 0; i < (int) airports.size(); i++) {
+    if (!graph.vertexExists(airports.at(i))) {
+      graph.insertVertex(airports.at(i));
+      map[airports.at(i)->id] = airports.at(i);
+    }
+  }
+
+  EdgeParser edge_parser;
+  edge_parser.OpenFile("data/routes.dat");
+  edge_parser.CreateEdges(graph, map);
+
+  Landmark landmark;
+  SECTION ("Landmark finds shortest path between three directly linked airports") {
+    vector<Vertex> path;
+    path.push_back(map[3830]);
+    path.push_back(map[3131]);
+    path.push_back(map[3361]);
+    vector<vector<Vertex>> full_path = landmark.findLandmarkPath(graph, path);
+    vector<int> correct_path{3830, 3093, 3131, 3131, 3304, 3361};
+    int i = 0;
+    for (vector<Vertex> p : full_path) {
+      for (Vertex v : p) {
+        REQUIRE(v->id == correct_path[i++]);
+      }
+    }
+  }
 }
