@@ -2,10 +2,6 @@
 #include <map>
 #include <iostream>
 
-void Dijkstra::DijkstraSSSP(Graph& graph, Vertex s) {
-    return;
-}
-
 vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
     unordered_map<Vertex, double> distances;
     unordered_map<Vertex, Vertex> previous;

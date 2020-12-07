@@ -8,6 +8,10 @@
 
 class Landmark {
     public:
-        //vector<Vertex> findLandmarkPath(Graph& graph, vector<Vertex> airports);
+        /**
+         * @param graph - Graph in which to perform Landmark path on
+         * @param airports - Path of the desired airports
+         * @return - A vector of vectors of the shortest path between two airports;
+         */ 
         vector<vector<Vertex>> findLandmarkPath(Graph& graph, vector<Vertex> airports);
 };
