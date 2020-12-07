@@ -136,6 +136,11 @@ void userProgram() {
 
   std::cout << "Bon Voyage! :)" << std::endl;
 
+  // Delete heap memory to ensure no memory leaks
+  for (int i = 0; i < (int) airports.size(); i++) {
+    delete airports[i];
+    airports[i] = NULL;
+  }
 }
 
 int main() {
