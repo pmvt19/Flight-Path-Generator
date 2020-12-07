@@ -9,7 +9,7 @@
 #include "BFS_Traversal.h"
 #include "dijkstra.h"
 #include "landmark_path.h"
-#include "connected_component.h"
+#include "Connected_component.h"
 
 // Gets origin airport id from user
 int getOriginId(unordered_map<int, Airport*> map) {
@@ -144,10 +144,7 @@ void userProgram() {
   }
 }
 
-int main() {
-
-  //userProgram();
-
+void numberOfConnectedComponents() {
   Graph graph(true, true);
 
   VertexParser parser;
@@ -164,6 +161,10 @@ int main() {
   std::cout << map[3830]->name << std::endl;
   ConnectedComponents comp;
   comp.calculateConnectedComponents(map);
+}
+
+int main() {
+  userProgram();
   return 0;
 
 }

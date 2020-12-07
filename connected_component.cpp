@@ -1,4 +1,4 @@
-#include "connected_component.h"
+#include "Connected_component.h"
 
     void ConnectedComponents::addelements(int num) {
         for (int i = 0; i < num; i++) {
