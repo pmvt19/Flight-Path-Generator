@@ -283,7 +283,7 @@ TEST_CASE("Testing Landmark Algorithm", "[landmark]") {
   edge_parser.CreateEdges(graph, map);
 
   Landmark landmark;
-  SECTION ("Landmark finds shortest path between three directly linked airports") {
+  SECTION ("Landmark finds shortest path between three linked airports") {
     vector<Vertex> path;
     path.push_back(map[3830]);
     path.push_back(map[3131]);
