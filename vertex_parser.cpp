@@ -11,7 +11,6 @@ vector<Airport*> VertexParser::GenerateVertices() {
     vector<Airport*> airports;
 
     string line;
-    int j = 0;
     while(getline(file, line)) {
 
         stringstream s_stream(line);
@@ -20,10 +19,9 @@ vector<Airport*> VertexParser::GenerateVertices() {
             string sub;
             getline(s_stream, sub, ',');
             results.push_back(sub);
-            // std::cout << sub << std::endl;
         }
-        // std::cout << "RESULTS SIZE: " << results.size() << std::endl;
-        // std::cout << line << std::endl;
+        
+        // Pull data from line into Airport struct
         Airport* airport = new Airport();
         airport->id = stoi(results.at(0));
         airport->name = results.at(1);
@@ -32,6 +30,7 @@ vector<Airport*> VertexParser::GenerateVertices() {
         airport->IATA = results.at(4);
         airport->ICAO = results.at(5);
 
+        // Check if data is empty
         if (results.at(6) == ("\\N")) {
             airport->latitude = 0.0;
         } else {

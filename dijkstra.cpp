@@ -3,6 +3,8 @@
 #include <iostream>
 
 vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
+
+    // Initialize variables
     unordered_map<Vertex, double> distances;
     unordered_map<Vertex, Vertex> previous;
     priority_queue<pair<Vertex, double>, vector<pair<Vertex, double>>, Compare> pq;
@@ -17,6 +19,7 @@ vector<Vertex> Dijkstra::DijkstraSSSP(Graph& graph, Vertex s, Vertex d) {
     distances[s] = 0;
     pq.push(make_pair(s, 0));
 
+    // Perform Dijkstra's Algorithm
     pair<Vertex, double> curr = pq.top();
     while (!pq.empty() && curr.first != d) {
         curr = pq.top();

@@ -10,8 +10,7 @@
 #include "dijkstra.h"
 #include "landmark_path.h"
 
-
-
+// Gets origin airport id from user
 int getOriginId(unordered_map<int, Airport*> map) {
   std::cout << "Please enter your origin airport id" << std::endl;
 
@@ -28,6 +27,7 @@ int getOriginId(unordered_map<int, Airport*> map) {
   return origin;
 }
 
+// Gets the number of destinations from user
 int getNumDestinations() {
   std::cout << "How many destination airports would you like?" << std::endl;
 
@@ -44,6 +44,7 @@ int getNumDestinations() {
   return num_dest;
 }
 
+// Gets destination airport id from user
 int getDestinationID(unordered_map<int, Airport*> map, int num) {
   std::cout << "Please enter your destination airport id" << std::endl;
 
@@ -62,10 +63,12 @@ int getDestinationID(unordered_map<int, Airport*> map, int num) {
     return dest;
 }
 
+// Prints out the whole path
 void printFullPath(vector<vector<Vertex>>& airport_path, vector<Vertex>& airport_list) {
   std::cout << "Full Path of Trip:" << std::endl;
   int count = 0;
   for (vector<Vertex> p : airport_path) {
+
     // Handles case where route does not exist
     if (p.size() == 0) {
       std::cout << "The route from " << airport_list.at(count) -> name << " to " << airport_list.at(count + 1) -> name << " does not exist.";
@@ -83,6 +86,7 @@ void printFullPath(vector<vector<Vertex>>& airport_path, vector<Vertex>& airport
   }
 }
 
+// Prints the total distance of the route
 void printTotalDistance(int& total_distance, EdgeParser& edge_parser, vector<vector<Vertex>>& airport_path) {
   for (vector<Vertex> p : airport_path) {
     for (int i = 0; i < (int) p.size() - 1; i++) {
@@ -92,6 +96,7 @@ void printTotalDistance(int& total_distance, EdgeParser& edge_parser, vector<vec
   std::cout << "Total Distance: " << total_distance << std::endl;
 }
 
+// main program method
 void userProgram() {
   Graph graph(true, true);
 

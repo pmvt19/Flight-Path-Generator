@@ -9,6 +9,7 @@ bool EdgeParser::OpenFile(const string& file_path) {
 void EdgeParser::CreateEdges(Graph& graph, const unordered_map<int, Airport*> map) {
     string line;
 
+    // Parse routes file
     while(getline(file, line)) {
         stringstream s_stream(line);
         vector<string> results;
@@ -18,6 +19,7 @@ void EdgeParser::CreateEdges(Graph& graph, const unordered_map<int, Airport*> ma
             results.push_back(sub);
         }
 
+        // Check for empty data
         if (results.at(3) == "\\N" || results.at(5) == "\\N") {
             continue;
         }
@@ -45,6 +47,7 @@ double EdgeParser::calculateDistance(double lat1, double long1, double lat2, dou
     double longDiff = rLong2 - rLong1;
     double latDiff = rLat2 - rLat1;
 
+    // Distance Formula taking into account curvature of Earth
     double dist = pow(sin(latDiff / 2), 2) + cos(rLat1) * cos(rLat2) * pow(sin(longDiff / 2), 2);
 
     dist = 2 * asin(sqrt(dist));
