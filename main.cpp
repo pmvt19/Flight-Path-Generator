@@ -142,6 +142,7 @@ void userProgram() {
     delete airports[i];
     airports[i] = NULL;
   }
+  
 }
 
 void numberOfConnectedComponents() {
@@ -163,7 +164,35 @@ void numberOfConnectedComponents() {
   comp.calculateConnectedComponents(map);
 }
 
+void BFSTraversalCheck() {
+  Graph graph(true, true);
+
+  VertexParser parser;
+  parser.OpenFile("data/airports.dat");
+  vector<Vertex> airports = parser.GenerateVertices();
+  unordered_map<int, Airport*> map;
+
+  for (int i = 0; i < (int) airports.size(); i++) {
+    if (!graph.vertexExists(airports.at(i))) {
+      graph.insertVertex(airports.at(i));
+      map[airports.at(i)->id] = airports.at(i);
+    }
+  }
+
+  EdgeParser edge_parser;
+  edge_parser.OpenFile("data/routes.dat");
+  edge_parser.CreateEdges(graph, map);
+
+  vector<Vertex> airport_list;
+
+  BFS bfs;
+  bfs.search(graph);
+  bfs.writeToFile(graph);
+}
+
 int main() {
+  //BFSTraversalCheck();
+  //numberOfConnectedComponents();
   userProgram();
   return 0;
 

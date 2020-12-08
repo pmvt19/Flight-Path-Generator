@@ -191,12 +191,17 @@ TEST_CASE("Testing BFS_Traversal", "[BFS]") {
   edge_parser.OpenFile("data/routes.dat");
   edge_parser.CreateEdges(graph, map);
   BFS bfs;
-  SECTION("BFS finds already visited vertex") {
-      REQUIRE ( bfs.search(graph, 8853) == true );
-  }
-
-  SECTION("BFS finds not visited vertex") {
-      REQUIRE ( bfs.search(graph, 1010101010) == false );
+  SECTION("BFS writes to file") {
+    string line;
+    ifstream myfile ("BFStraversal.txt");
+    REQUIRE(myfile.is_open());
+    if (myfile.is_open())
+    {
+      int count = 0;
+      while ( getline (myfile,line)) count++;
+      myfile.close();
+      REQUIRE(count == 37021);
+    }
   }
 }
 

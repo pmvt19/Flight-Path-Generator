@@ -12,18 +12,20 @@ class BFS {
     
         /**
          * @param graph - Graph to perfrom BFS on
-         * @param id - Id of the airport to find
-         * @return - True if vertex if found; False otherwise
          */ 
-        bool search(Graph& graph, int id);
+        void search(Graph& graph);
 
         /**
          * @param graph - Graph to perfrom BFS on
          * @param v - Vertex to explore adjacent edges on
-         * @param id - Id of the airport to find
-         * @return - True if vertex if found; False otherwise
          */ 
-        bool search(Graph& graph, Vertex v, int id);
+        void search(Graph& graph, Vertex v);
+
+        /**
+         * Save results from BFS traversal to a file
+         * @param graph - Graph where edges are stored
+         */ 
+        void writeToFile(Graph& graph);
 
     private:
         vector<bool> visited;

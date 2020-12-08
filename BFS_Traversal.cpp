@@ -1,6 +1,8 @@
 #include "BFS_Traversal.h"
+#include <iostream>
+#include <fstream>
 
-bool BFS::search(Graph& graph, int id) {
+void BFS::search(Graph& graph) {
     visited.resize(graph.getVertices().size());
 
     for (Vertex v : graph.getVertices()) {
@@ -13,28 +15,18 @@ bool BFS::search(Graph& graph, int id) {
 
     for (Vertex v : graph.getVertices()) {
         if (v->label == "UNEXPLORED") {
-            bool result = search(graph, v, id);
-            if (result) {
-                return result;
-            }
+            search(graph, v);
         }
     }
-    return false;
 }
 
-bool BFS::search(Graph& graph, Vertex v, int id) {
+void BFS::search(Graph& graph, Vertex v) {
     queue<Vertex> q;
     v->label = "VISITED";
     q.push(v);
-
     while(!q.empty()) {
         v = q.front();
         q.pop();
-
-        if (v->id == id) {
-            return true;
-        }
-
         for (Vertex w : graph.getAdjacent(v)) {
             if (w->label == "UNEXPLORED") {
                 graph.setEdgeLabel(v, w, "DISCOVERY");
@@ -45,6 +37,13 @@ bool BFS::search(Graph& graph, Vertex v, int id) {
             }
         }
     }
+}
 
-    return false;
+void BFS::writeToFile(Graph& graph) {
+    std::ofstream myfile;
+    myfile.open ("BFStraversal.txt");
+    for (auto e : graph.getEdgesByPointer()) {
+        myfile << e -> source -> name << ", " << e -> dest -> name << ", " << e->getLabel() << "\n";
+    }
+    myfile.close();
 }
