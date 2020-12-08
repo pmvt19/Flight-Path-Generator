@@ -9,7 +9,7 @@
 #include "BFS_Traversal.h"
 #include "dijkstra.h"
 #include "landmark_path.h"
-#include "Connected_component.h"
+#include "connected_component.h"
 
 // Gets origin airport id from user
 int getOriginId(unordered_map<int, Airport*> map) {
