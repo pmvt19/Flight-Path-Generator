@@ -9,6 +9,9 @@ Kevin Zhao - [`kevinz6@illinois.edu`]
 # Flight Path Generator
 
 ![](https://i.imgur.com/IfaxmK3.png)
+## [CS225 Final Project Video](https://www.youtube.com/watch?v=azosblYwf2k)
+[![CS225 Final Project Video](https://img.youtube.com/vi/azosblYwf2k/maxresdefault.jpg)](https://www.youtube.com/watch?v=azosblYwf2k)
+
 
 ## Features
 * The user will be able to generate a flight path from inputted airports.
